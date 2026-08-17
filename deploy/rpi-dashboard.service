@@ -1,0 +1,21 @@
+[Unit]
+Description=Raspberry Pi Smart Dashboard Service
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%USER%
+WorkingDirectory=%DASHBOARD_DIR%
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOST=0.0.0.0
+ExecStart=/usr/bin/npm --prefix %DASHBOARD_DIR%/backend run start
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=rpi-dashboard
+
+[Install]
+WantedBy=multi-user.target

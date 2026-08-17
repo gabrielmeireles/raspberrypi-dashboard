@@ -1,0 +1,25 @@
+{
+  "name": "raspberrypi-dashboard",
+  "version": "1.0.0",
+  "description": "Smart Dashboard for Raspberry Pi 4 Model B (MVG departures, Open-Meteo weather, Touch UI)",
+  "private": true,
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "npm --prefix backend run start",
+    "setup": "npm --prefix backend install && npm --prefix frontend install"
+  },
+  "keywords": [
+    "raspberry-pi",
+    "dashboard",
+    "mvg",
+    "weather",
+    "svelte5",
+    "kiosk"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="berry" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b69" />
+      <stop offset="100%" stop-color="#b8003a" />
+    </linearGradient>
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Berry drupelets with subtle 3D shadow -->
+  <g filter="url(#shadow)">
+    <!-- Top row -->
+    <circle cx="23" cy="25" r="9" fill="url(#berry)" />
+    <circle cx="41" cy="25" r="9" fill="url(#berry)" />
+    <circle cx="32" cy="22" r="9" fill="url(#berry)" />
+    <!-- Middle row -->
+    <circle cx="17" cy="36" r="8.5" fill="url(#berry)" />
+    <circle cx="47" cy="36" r="8.5" fill="url(#berry)" />
+    <circle cx="26" cy="37" r="9" fill="url(#berry)" />
+    <circle cx="38" cy="37" r="9" fill="url(#berry)" />
+    <!-- Bottom row -->
+    <circle cx="24" cy="48" r="8" fill="url(#berry)" />
+    <circle cx="40" cy="48" r="8" fill="url(#berry)" />
+    <circle cx="32" cy="53" r="7.5" fill="url(#berry)" />
+  </g>
+
+  <!-- Cute Face -->
+  <!-- Left Eye -->
+  <circle cx="26" cy="36" r="2.8" fill="#1e1e24" />
+  <circle cx="25.2" cy="35.2" r="1.1" fill="#ffffff" />
+  <!-- Right Eye -->
+  <circle cx="38" cy="36" r="2.8" fill="#1e1e24" />
+  <circle cx="37.2" cy="35.2" r="1.1" fill="#ffffff" />
+  <!-- Cheeks -->
+  <circle cx="20.5" cy="40.5" r="2.2" fill="#ff70a6" opacity="0.85" />
+  <circle cx="43.5" cy="40.5" r="2.2" fill="#ff70a6" opacity="0.85" />
+  <!-- Smile -->
+  <path d="M 29.5 40.5 Q 32 43.5 34.5 40.5" fill="none" stroke="#1e1e24" stroke-width="1.8" stroke-linecap="round" />
+
+  <!-- Leaves & Stem -->
+  <!-- Stem -->
+  <path d="M 32 17 C 32 11 36 8 40 7 C 37 11 35 15 33 18 Z" fill="url(#leaf)" />
+  <!-- Left Leaf -->
+  <path d="M 32 18 C 24 13 18 16 16 21 C 21 21 27 20 32 18 Z" fill="url(#leaf)" />
+  <!-- Right Leaf -->
+  <path d="M 32 18 C 40 13 46 16 48 21 C 43 21 37 20 32 18 Z" fill="url(#leaf)" />
+  
+  <!-- Sparkle -->
+  <path d="M 50 11 L 51.2 14.2 L 54.5 15.5 L 51.2 16.8 L 50 20 L 48.8 16.8 L 45.5 15.5 L 48.8 14.2 Z" fill="#fbbf24" />
+</svg>
