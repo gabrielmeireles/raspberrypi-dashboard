@@ -95,7 +95,7 @@ export function getCategory(product: TransportProduct): TransitCategory {
 }
 
 async function fetchDeparturesForStation(station: StationConfig): Promise<NormalizedDeparture[]> {
-  const url = `https://www.mvg.de/api/bgw-pt/v3/departures?globalId=${encodeURIComponent(station.id)}`;
+  const url = `https://www.mvg.de/api/bgw-pt/v3/departures?globalId=${encodeURIComponent(station.id)}&limit=100&transportTypes=UBAHN,TRAM,SBAHN,BUS,REGIONAL_BUS,BAHN`;
 
   try {
     const res = await fetch(url, {
