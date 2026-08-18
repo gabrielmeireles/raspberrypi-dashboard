@@ -12,3 +12,6 @@ Thumbs.db
 # Logs
 logs/
 *.log
+
+# Personal
+config.json
