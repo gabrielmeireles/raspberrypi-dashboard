@@ -1,6 +1,7 @@
 <script lang="ts">
   import { i18n } from '../../lib/i18n/index.svelte.js';
   import { store } from '../../lib/store.svelte.js';
+    import methods from '../../utils/methods.js';
   import Icon from '../Icon.svelte';
   import WeatherBadge from '../WeatherBadge.svelte';
 
@@ -68,7 +69,7 @@
         <span class="text-[9px] text-slate-500">{i18n.t('weather.swipeHint')}</span>
       </div>
 
-      <div class="flex space-x-1.5 overflow-x-auto pb-0.5 select-none overscroll-contain touch-pan-x">
+      <div class="flex space-x-1.5 overflow-x-auto pb-0.5 select-none overscroll-contain touch-pan-x" use:methods.dragScrollX>
         {#each hourly as h, index}
           <div
             class="flex-shrink-0 w-14 py-1.5 px-1 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col items-center justify-between gap-0.5 {
@@ -93,36 +94,38 @@
 
     <!-- Weekly forecast fills remaining space -->
     <div class="glass-card dashboard-card flex-1 min-h-0 flex flex-col overflow-hidden">
-      <div class="flex items-center space-x-1.5 mb-1 pb-0.5 border-b border-slate-800 shrink-0">
+      <div class="flex items-center space-x-1.5 mb-2 pb-0.5 border-b border-slate-800 shrink-0">
         <Icon name="sun" size={13} class="text-amber-400" />
         <h3 class="text-[10px] font-bold uppercase tracking-wider text-slate-300">
           {i18n.t('weather.weeklyTrendTitle')}
         </h3>
       </div>
 
-      <div class="flex-1 min-h-0 grid grid-cols-2 gap-1 content-start overflow-hidden">
+      <!-- Horizontal Scroll Container -->
+      <div class="flex-1 min-h-0 flex overflow-x-auto gap-2 pb-1 snap-x scroll-smooth">
         {#each daily as d, index}
+          <!-- Vertical Chip -->
           <div
-            class="px-1.5 py-1 rounded-lg bg-slate-900/60 border border-slate-800/80 flex items-center justify-between text-[10px] {
+            class="min-w-[4.5rem] flex-1 p-2 rounded-lg bg-slate-900/60 border border-slate-800/80 flex flex-col items-center justify-between text-[10px] snap-start {
               index === 0 ? 'border-sky-500/30 bg-sky-950/20' : ''
             }"
           >
-            <div class="w-14 shrink-0">
+            <div class="text-center shrink-0 w-full">
               <span class="font-bold text-white block leading-tight">
                 {index === 0 ? i18n.t('weather.today') : i18n.formatWeekday(d.date, 'short')}
               </span>
-              <span class="text-[8px] text-slate-400 block font-mono leading-tight">
+              <span class="text-[8px] text-slate-400 block font-mono leading-tight mt-0.5">
                 {i18n.formatDayAndMonth(d.date)}
               </span>
             </div>
 
-            <div class="text-sky-400 px-0.5 shrink-0">
-              <Icon name={d.weatherIcon} size={16} />
+            <div class="text-sky-400 py-1.5 shrink-0 flex items-center justify-center">
+              <Icon name={d.weatherIcon} size={18} />
             </div>
 
-            <div class="w-12 text-center shrink-0">
+            <div class="text-center shrink-0 w-full mb-1 flex items-center justify-center min-h-[14px]">
               {#if d.precipitationProbabilityMax >= 20}
-                <span class="text-[8px] font-mono font-semibold text-sky-400 flex items-center justify-center space-x-0.5">
+                <span class="text-[8px] font-mono font-semibold text-sky-400 flex items-center space-x-0.5">
                   <Icon name="droplet" size={8} />
                   <span>{d.precipitationProbabilityMax}%</span>
                 </span>
@@ -131,7 +134,7 @@
               {/if}
             </div>
 
-            <div class="text-right font-mono font-semibold shrink-0">
+            <div class="text-center font-mono font-semibold shrink-0 w-full pt-1 border-t border-slate-700/50 mt-auto">
               <span class="text-white font-bold">{d.maxTemp}°</span>
               <span class="text-slate-500 ml-0.5 text-[9px]">{d.minTemp}°</span>
             </div>

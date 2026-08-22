@@ -70,7 +70,7 @@
     </div>
 
     <!-- Station Selection Filter Pills -->
-    <div class="flex items-center space-x-1.5 overflow-x-auto select-none py-0.5 pr-1 scrollbar-none flex-1 overscroll-contain touch-pan-x">
+    <div class="flex items-center space-x-1.5 overflow-x-auto select-none py-0.5 pr-1 scrollbar-none flex-1 overscroll-contain touch-pan-x" use:methods.dragScrollX>
       <!-- "All Stations" Pill -->
       <button
         onclick={() => (selectedStationId = 'all')}
@@ -137,7 +137,7 @@
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5">
+      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5" use:methods.dragScrollY>
         {#if filteredTrains().length > 0}
           {#each filteredTrains() as dep (dep.id)}
             <div
@@ -221,7 +221,7 @@
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5">
+      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5" use:methods.dragScrollY>
         {#if filteredBusesAndTrams().length > 0}
           {#each filteredBusesAndTrams() as dep (dep.id)}
             <div
