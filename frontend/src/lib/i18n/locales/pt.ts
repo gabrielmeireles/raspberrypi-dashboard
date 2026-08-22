@@ -15,7 +15,7 @@ export const pt: Translations = {
     feelsLike: 'Sensação {temp}°C',
     loadingWeather: 'A carregar dados meteorológicos...',
     nextTrains: 'Próximos Trens (Metro / S-Bahn)',
-    nextBusesTrams: 'Próximos Ônibus & Elétricos',
+    nextBusesTrams: 'Próximos Ônibus & Trams',
     viewAll: 'Todos',
     noTrains: 'Nenhuma partida de trem encontrada',
     noBuses: 'Nenhuma partida de ônibus ou elétrico encontrada',
@@ -25,7 +25,7 @@ export const pt: Translations = {
   },
   transit: {
     trainsTitle: 'Trens (Metro & S-Bahn)',
-    busesTramsTitle: 'Ônibus & Elétricos',
+    busesTramsTitle: 'Ônibus & Trams',
     departuresCount: '{count} Partidas',
     cancelled: 'Cancelado',
     platform: 'Linha/Plataforma {platform}',
