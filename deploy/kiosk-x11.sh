@@ -39,7 +39,7 @@ exec "$CHROME_BIN" \
   --disable-infobars \
   --disable-session-crashed-bubble \
   --check-for-update-interval=31536000 \
-  --disable-pinch \
+  --enable-pinch \
   --overscroll-history-navigation=0 \
   --enable-features=OverlayScrollbar \
   --autoplay-policy=no-user-gesture-required \

@@ -68,7 +68,7 @@
         <span class="text-[9px] text-slate-500">{i18n.t('weather.swipeHint')}</span>
       </div>
 
-      <div class="flex space-x-1.5 overflow-x-auto pb-0.5 select-none">
+      <div class="flex space-x-1.5 overflow-x-auto pb-0.5 select-none overscroll-contain touch-pan-x">
         {#each hourly as h, index}
           <div
             class="flex-shrink-0 w-14 py-1.5 px-1 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col items-center justify-between gap-0.5 {

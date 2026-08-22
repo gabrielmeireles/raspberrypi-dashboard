@@ -4,6 +4,7 @@
   import Icon from '../Icon.svelte';
   import LinePill from '../LinePill.svelte';
   import type { NormalizedDeparture } from '../../types/dashboard.types.js';
+    import methods from '../../utils/methods.js';
 
   let selectedStationId = $state<string>('all');
 
@@ -54,35 +55,6 @@
         dep.stationName === selectedStationId
     );
   });
-
-  function formatDepartureTime(dep: NormalizedDeparture): string {
-    const time = dep.isRealtime ? dep.realtimeTime : dep.plannedTime;
-    const d = new Date(time);
-    return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
-  }
-
-  function formatRelativeTime(dep: NormalizedDeparture): { text: string; suffix: string } | null {
-    if (dep.departureInMinutes <= 0) return null;
-    if (dep.departureInMinutes >= 60) {
-      const h = Math.floor(dep.departureInMinutes / 60);
-      const m = dep.departureInMinutes % 60;
-      return { text: `${h}h${m > 0 ? ` ${m}` : ''}`, suffix: m > 0 ? i18n.t('transit.min') : '' };
-    }
-    return { text: `${dep.departureInMinutes}`, suffix: i18n.t('transit.min') };
-  }
-
-  function getDepartureColorClass(dep: NormalizedDeparture): string {
-    if (dep.isCancelled) {
-      return 'text-red-400/80 line-through';
-    }
-    if (!dep.isRealtime) {
-      return 'text-white font-semibold';
-    }
-    if (dep.delayMinutes > 0) {
-      return 'text-rose-400 font-extrabold';
-    }
-    return `text-emerald-400 font-extrabold ${dep.departureInMinutes <= 2 ? 'animate-pulse' : ''}`;
-  }
 </script>
 
 <div class="dashboard-view flex flex-col gap-1.5">
@@ -98,7 +70,7 @@
     </div>
 
     <!-- Station Selection Filter Pills -->
-    <div class="flex items-center space-x-1.5 overflow-x-auto select-none py-0.5 pr-1 scrollbar-none flex-1">
+    <div class="flex items-center space-x-1.5 overflow-x-auto select-none py-0.5 pr-1 scrollbar-none flex-1 overscroll-contain touch-pan-x">
       <!-- "All Stations" Pill -->
       <button
         onclick={() => (selectedStationId = 'all')}
@@ -165,7 +137,7 @@
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 min-h-0 overflow-y-auto space-y-1 pr-0.5">
+      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5">
         {#if filteredTrains().length > 0}
           {#each filteredTrains() as dep (dep.id)}
             <div
@@ -207,13 +179,13 @@
                     +{dep.delayMinutes}'
                   </span>
                 {/if}
-                <div class="flex flex-col items-end {getDepartureColorClass(dep)}">
-                  <span class="font-mono text-[11px] leading-none">{formatDepartureTime(dep)}</span>
+                <div class="flex flex-col items-end {methods.getDepartureColorClass(dep)}">
+                  <span class="font-mono text-[11px] leading-none">{methods.formatDepartureTime(dep)}</span>
                   <span class="font-mono text-[9px] opacity-70 leading-none mt-0.5">
                     {#if dep.departureInMinutes <= 0}
                       {i18n.t('transit.now')}
                     {:else}
-                      {@const rel = formatRelativeTime(dep)}
+                      {@const rel = methods.formatRelativeTime(dep)}
                       {#if rel}
                         {rel.text}{#if rel.suffix}&nbsp;<span class="font-normal">{rel.suffix}</span>{/if}
                       {/if}
@@ -249,7 +221,7 @@
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 min-h-0 overflow-y-auto space-y-1 pr-0.5">
+      <div class="flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y space-y-1 pr-0.5">
         {#if filteredBusesAndTrams().length > 0}
           {#each filteredBusesAndTrams() as dep (dep.id)}
             <div
@@ -286,13 +258,13 @@
                     +{dep.delayMinutes}'
                   </span>
                 {/if}
-                <div class="flex flex-col items-end {getDepartureColorClass(dep)}">
-                  <span class="font-mono text-[11px] leading-none">{formatDepartureTime(dep)}</span>
+                <div class="flex flex-col items-end {methods.getDepartureColorClass(dep)}">
+                  <span class="font-mono text-[11px] leading-none">{methods.formatDepartureTime(dep)}</span>
                   <span class="font-mono text-[9px] opacity-70 leading-none mt-0.5">
                     {#if dep.departureInMinutes <= 0}
                       {i18n.t('transit.now')}
                     {:else}
-                      {@const rel = formatRelativeTime(dep)}
+                      {@const rel = methods.formatRelativeTime(dep)}
                       {#if rel}
                         {rel.text}{#if rel.suffix}&nbsp;<span class="font-normal">{rel.suffix}</span>{/if}
                       {/if}

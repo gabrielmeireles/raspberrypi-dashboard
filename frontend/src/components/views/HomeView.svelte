@@ -6,6 +6,7 @@
   import LinePill from '../LinePill.svelte';
   import WeatherBadge from '../WeatherBadge.svelte';
   import type { NormalizedDeparture } from '../../types/dashboard.types.js';
+    import methods from '../../utils/methods.js';
 
   const weather = $derived(store.weather);
   const advisor = $derived(store.weather?.advisor);
@@ -16,35 +17,6 @@
     if (!weather) return '';
     return i18n.getWeatherLabel(weather.current.weatherCode, weather.current.isDay);
   });
-
-  function formatDepartureTime(dep: NormalizedDeparture): string {
-    const time = dep.isRealtime ? dep.realtimeTime : dep.plannedTime;
-    const d = new Date(time);
-    return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
-  }
-
-  function formatRelativeTime(dep: NormalizedDeparture): { text: string; suffix: string } | null {
-    if (dep.departureInMinutes <= 0) return null;
-    if (dep.departureInMinutes >= 60) {
-      const h = Math.floor(dep.departureInMinutes / 60);
-      const m = dep.departureInMinutes % 60;
-      return { text: `${h}h${m > 0 ? ` ${m}` : ''}`, suffix: m > 0 ? i18n.t('home.min') : '' };
-    }
-    return { text: `${dep.departureInMinutes}`, suffix: i18n.t('home.min') };
-  }
-
-  function getDepartureColorClass(dep: NormalizedDeparture): string {
-    if (dep.isCancelled) {
-      return 'text-red-400/80 line-through';
-    }
-    if (!dep.isRealtime) {
-      return 'text-white font-semibold';
-    }
-    if (dep.delayMinutes > 0) {
-      return 'text-rose-400 font-extrabold';
-    }
-    return `text-emerald-400 font-extrabold ${dep.departureInMinutes <= 2 ? 'animate-pulse' : ''}`;
-  }
 </script>
 
 {#snippet departureRow(dep: NormalizedDeparture)}
@@ -83,13 +55,13 @@
           +{dep.delayMinutes}'
         </span>
       {/if}
-      <div class="flex flex-col items-end {getDepartureColorClass(dep)}">
-        <span class="font-mono text-[11px] leading-none">{formatDepartureTime(dep)}</span>
+      <div class="flex flex-col items-end {methods.getDepartureColorClass(dep)}">
+        <span class="font-mono text-[11px] leading-none">{methods.formatDepartureTime(dep)}</span>
         <span class="font-mono text-[9px] opacity-70 leading-none mt-0.5">
           {#if dep.departureInMinutes <= 0}
             {i18n.t('home.now')}
           {:else}
-            {@const rel = formatRelativeTime(dep)}
+            {@const rel = methods.formatRelativeTime(dep)}
             {#if rel}
               {rel.text}{#if rel.suffix}&nbsp;<span class="font-normal">{rel.suffix}</span>{/if}
             {/if}
