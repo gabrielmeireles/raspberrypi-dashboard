@@ -40,7 +40,7 @@
     title={i18n.t('nav.changeLanguage')}
     aria-label={i18n.t('nav.changeLanguage')}
     aria-expanded={isOpen}
-    class="touch-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl border transition-all text-xs font-semibold select-none {
+    class="touch-btn flex items-center space-x-1 px-2 py-1 rounded-lg border transition-all text-[10px] font-semibold select-none {
       isOpen
         ? 'bg-sky-500/20 text-sky-300 border-sky-500/40 shadow-sm shadow-sky-500/20'
         : 'bg-slate-900/90 text-slate-300 border-slate-700/80 hover:text-white hover:border-slate-600 hover:bg-slate-800'

@@ -85,24 +85,24 @@
   }
 </script>
 
-<div class="h-full w-full p-4 flex flex-col overflow-hidden space-y-3">
+<div class="dashboard-view flex flex-col gap-1.5">
   <!-- Top Station Filter Bar -->
-  <div class="glass-card rounded-2xl px-3.5 py-2.5 flex items-center space-x-3 shrink-0 shadow-lg shadow-black/20 border border-slate-800/80">
-    <div class="flex items-center space-x-2 text-xs font-bold text-slate-300 shrink-0">
-      <div class="p-1.5 rounded-lg bg-sky-500/10 text-sky-400">
-        <Icon name="map-pin" size={15} />
+  <div class="glass-card dashboard-card flex items-center space-x-2 shrink-0 shadow-lg shadow-black/20 border border-slate-800/80">
+    <div class="flex items-center space-x-1.5 text-[10px] font-bold text-slate-300 shrink-0">
+      <div class="p-1 rounded-md bg-sky-500/10 text-sky-400">
+        <Icon name="map-pin" size={13} />
       </div>
-      <span class="hidden sm:inline uppercase tracking-wider text-[11px] text-slate-400">
+      <span class="uppercase tracking-wider text-[9px] text-slate-400">
         {i18n.t('transit.filterStation')}:
       </span>
     </div>
 
     <!-- Station Selection Filter Pills -->
-    <div class="flex items-center space-x-2 overflow-x-auto select-none py-0.5 pr-2 scrollbar-none flex-1">
+    <div class="flex items-center space-x-1.5 overflow-x-auto select-none py-0.5 pr-1 scrollbar-none flex-1">
       <!-- "All Stations" Pill -->
       <button
         onclick={() => (selectedStationId = 'all')}
-        class="touch-btn shrink-0 flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all {
+        class="touch-btn shrink-0 flex items-center space-x-1 px-2 py-1 rounded-lg text-[10px] font-semibold transition-all {
           selectedStationId === 'all'
             ? 'bg-sky-500/20 text-sky-300 border border-sky-500/50 shadow-sm shadow-sky-500/20'
             : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-slate-200'
@@ -124,13 +124,13 @@
       {#each stationOptions() as station (station.id)}
         <button
           onclick={() => (selectedStationId = station.id)}
-          class="touch-btn shrink-0 flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all {
+          class="touch-btn shrink-0 flex items-center space-x-1 px-2 py-1 rounded-lg text-[10px] font-semibold transition-all {
             selectedStationId === station.id
               ? 'bg-sky-500/20 text-sky-300 border border-sky-500/50 shadow-sm shadow-sky-500/20'
               : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:border-slate-700 hover:text-slate-200'
           }"
         >
-          <span class="truncate max-w-[150px] sm:max-w-[200px]">{station.name}</span>
+          <span class="truncate max-w-[120px]">{station.name}</span>
           <span
             class="px-1.5 py-0.2 rounded-full font-mono text-[10px] {
               selectedStationId === station.id
@@ -146,53 +146,53 @@
   </div>
 
   <!-- Departures Columns (Trains & Buses) -->
-  <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden min-h-0">
+  <div class="flex-1 grid grid-cols-2 gap-1.5 overflow-hidden min-h-0">
     <!-- Left Column: Trains (U-Bahn & S-Bahn) -->
-    <div class="glass-card rounded-2xl p-4 flex flex-col h-full overflow-hidden">
+    <div class="glass-card dashboard-card flex flex-col h-full overflow-hidden">
       <!-- Section Header -->
-      <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 shrink-0">
-        <div class="flex items-center space-x-2">
-          <div class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
-            <Icon name="train" size={18} />
+      <div class="flex items-center justify-between pb-1 mb-1 border-b border-slate-800 shrink-0">
+        <div class="flex items-center space-x-1.5">
+          <div class="p-1 rounded-md bg-emerald-500/10 text-emerald-400">
+            <Icon name="train" size={14} />
           </div>
-          <h2 class="text-sm font-bold text-white tracking-wide uppercase">
+          <h2 class="text-[10px] font-bold text-white tracking-wide uppercase">
             {i18n.t('transit.trainsTitle')}
           </h2>
         </div>
-        <span class="px-2 py-0.5 rounded-full bg-slate-800 text-[11px] font-mono text-slate-400">
+        <span class="px-1.5 py-0 rounded-full bg-slate-800 text-[9px] font-mono text-slate-400">
           {i18n.t('transit.departuresCount', { count: filteredTrains().length })}
         </span>
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 overflow-y-auto space-y-2 pr-1">
+      <div class="flex-1 min-h-0 overflow-y-auto space-y-1 pr-0.5">
         {#if filteredTrains().length > 0}
           {#each filteredTrains() as dep (dep.id)}
             <div
-              class="flex items-center justify-between p-2.5 rounded-xl transition-colors {
+              class="departure-row flex items-center justify-between transition-colors {
                 dep.isCancelled
                   ? 'bg-red-950/20 border border-red-500/30 opacity-60'
                   : 'bg-slate-900/70 border border-slate-800/80 hover:border-slate-700'
               }"
             >
               <!-- Line badge + Destination + Station -->
-              <div class="flex items-center space-x-3 min-w-0 flex-1">
-                <LinePill line={dep.line} product={dep.product} colors={dep.colors} size="md" />
+              <div class="flex items-center space-x-2 min-w-0 flex-1">
+                <LinePill line={dep.line} product={dep.product} colors={dep.colors} size="sm" />
                 <div class="min-w-0 flex-1">
-                  <div class="flex items-center space-x-2">
-                    <p class="text-sm font-bold truncate leading-tight {dep.isCancelled ? 'line-through text-slate-400' : 'text-white'}">
+                  <div class="flex items-center space-x-1">
+                    <p class="text-[11px] font-bold truncate leading-tight {dep.isCancelled ? 'line-through text-slate-400' : 'text-white'}">
                       {dep.destination}
                     </p>
                     {#if dep.isCancelled}
-                      <span class="text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-red-500/20 text-red-400 border border-red-500/30 shrink-0">
+                      <span class="text-[8px] uppercase font-bold px-1 py-0 rounded bg-red-500/20 text-red-400 border border-red-500/30 shrink-0">
                         {i18n.t('transit.cancelled')}
                       </span>
                     {/if}
                   </div>
-                  <div class="flex items-center space-x-2 text-[11px] text-slate-400 mt-0.5">
+                  <div class="flex items-center space-x-1 text-[9px] text-slate-400 leading-tight">
                     <span class="truncate">{dep.stationName}</span>
                     {#if dep.platform}
-                      <span class="px-1.5 py-0.2 rounded bg-slate-800 font-mono text-slate-300">
+                      <span class="px-1 py-0 rounded bg-slate-800 font-mono text-slate-300 shrink-0">
                         {i18n.t('transit.platform', { platform: dep.platform })}
                       </span>
                     {/if}
@@ -201,15 +201,15 @@
               </div>
 
               <!-- Delay badge & Countdown -->
-              <div class="flex items-center space-x-2 pl-3 text-right shrink-0">
+              <div class="flex items-center space-x-1 pl-2 text-right shrink-0">
                 {#if dep.isRealtime && dep.delayMinutes > 0 && !dep.isCancelled}
-                  <span class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  <span class="text-[9px] font-bold px-1 py-0 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
                     +{dep.delayMinutes}'
                   </span>
                 {/if}
                 <div class="flex flex-col items-end {getDepartureColorClass(dep)}">
-                  <span class="font-mono text-base leading-tight">{formatDepartureTime(dep)}</span>
-                  <span class="font-mono text-[10px] opacity-70 leading-tight">
+                  <span class="font-mono text-[11px] leading-none">{formatDepartureTime(dep)}</span>
+                  <span class="font-mono text-[9px] opacity-70 leading-none mt-0.5">
                     {#if dep.departureInMinutes <= 0}
                       {i18n.t('transit.now')}
                     {:else}
@@ -224,7 +224,7 @@
             </div>
           {/each}
         {:else}
-          <div class="h-full flex items-center justify-center text-slate-500 text-xs">
+          <div class="h-full flex items-center justify-center text-slate-500 text-[10px]">
             {i18n.t('transit.noTrains')}
           </div>
         {/if}
@@ -232,63 +232,63 @@
     </div>
 
     <!-- Right Column: Buses & Trams -->
-    <div class="glass-card rounded-2xl p-4 flex flex-col h-full overflow-hidden">
+    <div class="glass-card dashboard-card flex flex-col h-full overflow-hidden">
       <!-- Section Header -->
-      <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 shrink-0">
-        <div class="flex items-center space-x-2">
-          <div class="p-1.5 rounded-lg bg-sky-500/10 text-sky-400">
-            <Icon name="bus" size={18} />
+      <div class="flex items-center justify-between pb-1 mb-1 border-b border-slate-800 shrink-0">
+        <div class="flex items-center space-x-1.5">
+          <div class="p-1 rounded-md bg-sky-500/10 text-sky-400">
+            <Icon name="bus" size={14} />
           </div>
-          <h2 class="text-sm font-bold text-white tracking-wide uppercase">
+          <h2 class="text-[10px] font-bold text-white tracking-wide uppercase">
             {i18n.t('transit.busesTramsTitle')}
           </h2>
         </div>
-        <span class="px-2 py-0.5 rounded-full bg-slate-800 text-[11px] font-mono text-slate-400">
+        <span class="px-1.5 py-0 rounded-full bg-slate-800 text-[9px] font-mono text-slate-400">
           {i18n.t('transit.departuresCount', { count: filteredBusesAndTrams().length })}
         </span>
       </div>
 
       <!-- Departures List -->
-      <div class="flex-1 overflow-y-auto space-y-2 pr-1">
+      <div class="flex-1 min-h-0 overflow-y-auto space-y-1 pr-0.5">
         {#if filteredBusesAndTrams().length > 0}
           {#each filteredBusesAndTrams() as dep (dep.id)}
             <div
-              class="flex items-center justify-between p-2.5 rounded-xl transition-colors {
+              class="departure-row flex items-center justify-between transition-colors {
                 dep.isCancelled
                   ? 'bg-red-950/20 border border-red-500/30 opacity-60'
                   : 'bg-slate-900/70 border border-slate-800/80 hover:border-slate-700'
               }"
             >
               <!-- Line badge + Destination + Station -->
-              <div class="flex items-center space-x-3 min-w-0 flex-1">
-                <LinePill line={dep.line} product={dep.product} colors={dep.colors} size="md" />
+              <div class="flex items-center space-x-2 min-w-0 flex-1">
+                <LinePill line={dep.line} product={dep.product} colors={dep.colors} size="sm" />
                 <div class="min-w-0 flex-1">
-                  <div class="flex items-center space-x-2">
-                    <p class="text-sm font-bold truncate leading-tight {dep.isCancelled ? 'line-through text-slate-400' : 'text-white'}">
+                  <div class="flex items-center space-x-1">
+                    <p class="text-[11px] font-bold truncate leading-tight {dep.isCancelled ? 'line-through text-slate-400' : 'text-white'}">
                       {dep.destination}
                     </p>
                     {#if dep.isCancelled}
-                      <span class="text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-red-500/20 text-red-400 border border-red-500/30 shrink-0">
+                      <span class="text-[8px] uppercase font-bold px-1 py-0 rounded bg-red-500/20 text-red-400 border border-red-500/30 shrink-0">
                         {i18n.t('transit.cancelled')}
                       </span>
                     {/if}
                   </div>
-                  <div class="flex items-center space-x-2 text-[11px] text-slate-400 mt-0.5">
+                  <div class="flex items-center space-x-1 text-[9px] text-slate-400 leading-tight">
                     <span class="truncate">{dep.stationName}</span>
                   </div>
                 </div>
               </div>
 
               <!-- Delay badge & Countdown -->
-              <div class="flex items-center space-x-2 pl-3 text-right shrink-0">
+              <div class="flex items-center space-x-1 pl-2 text-right shrink-0">
                 {#if dep.isRealtime && dep.delayMinutes > 0 && !dep.isCancelled}
-                  <span class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  <span class="text-[9px] font-bold px-1 py-0 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
                     +{dep.delayMinutes}'
                   </span>
                 {/if}
                 <div class="flex flex-col items-end {getDepartureColorClass(dep)}">
-                  <span class="font-mono text-base leading-tight">{formatDepartureTime(dep)}</span>
-                  <span class="font-mono text-[10px] opacity-70 leading-tight">
+                  <span class="font-mono text-[11px] leading-none">{formatDepartureTime(dep)}</span>
+                  <span class="font-mono text-[9px] opacity-70 leading-none mt-0.5">
                     {#if dep.departureInMinutes <= 0}
                       {i18n.t('transit.now')}
                     {:else}
@@ -303,7 +303,7 @@
             </div>
           {/each}
         {:else}
-          <div class="h-full flex items-center justify-center text-slate-500 text-xs">
+          <div class="h-full flex items-center justify-center text-slate-500 text-[10px]">
             {i18n.t('transit.noBuses')}
           </div>
         {/if}

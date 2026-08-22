@@ -18,13 +18,13 @@
   });
 </script>
 
-<nav class="h-16 bg-slate-950/90 border-t border-slate-800/80 backdrop-blur-md px-4 flex items-center justify-between z-30 shrink-0 select-none">
+<nav class="h-11 bg-slate-950/90 border-t border-slate-800/80 backdrop-blur-md px-2 flex items-center justify-between z-30 shrink-0 select-none">
   <!-- Tab navigation items -->
-  <div class="flex items-center space-x-2">
+  <div class="flex items-center space-x-1.5">
     {#each tabs as tab}
       <button
         onclick={() => store.setTab(tab.id)}
-        class="touch-btn relative flex items-center space-x-2 px-4 py-2.5 rounded-xl font-semibold text-sm transition-all {
+        class="touch-btn relative flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg font-semibold text-xs transition-all {
           store.activeTab === tab.id
             ? 'bg-sky-500/20 text-sky-300 border border-sky-500/40 shadow-sm shadow-sky-500/10'
             : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
@@ -32,7 +32,7 @@
       >
         <Icon
           name={tab.icon}
-          size={18}
+          size={15}
           class={store.activeTab === tab.id ? 'text-sky-400' : 'text-slate-400'}
         />
         <span>{tab.label}</span>
@@ -44,10 +44,10 @@
   </div>
 
   <!-- Right side: Last updated, Language switcher, and manual refresh button -->
-  <div class="flex items-center space-x-2 sm:space-x-3 text-xs text-slate-400">
-    <div class="hidden md:flex items-center space-x-1.5 font-mono">
-      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      <span>{i18n.t('nav.lastUpdated', { time: lastUpdatedFormatted() })}</span>
+  <div class="flex items-center space-x-1.5 text-[10px] text-slate-400">
+    <div class="flex items-center space-x-1 font-mono truncate max-w-[9rem]">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+      <span class="truncate">{i18n.t('nav.lastUpdated', { time: lastUpdatedFormatted() })}</span>
     </div>
 
     <!-- Language Selector Menu -->
@@ -59,11 +59,11 @@
       disabled={store.isRefreshing}
       title={i18n.t('nav.refreshTitle')}
       aria-label={i18n.t('nav.refresh')}
-      class="touch-btn flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white hover:border-slate-600 active:scale-95 disabled:opacity-50"
+      class="touch-btn flex items-center justify-center p-1.5 rounded-lg bg-slate-900 border border-slate-700/80 text-slate-300 hover:text-white hover:border-slate-600 active:scale-95 disabled:opacity-50"
     >
       <Icon
         name="refresh"
-        size={18}
+        size={15}
         class={store.isRefreshing ? 'animate-spin text-sky-400' : 'text-slate-300'}
       />
     </button>

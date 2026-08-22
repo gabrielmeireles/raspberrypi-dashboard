@@ -35,20 +35,18 @@
 </script>
 
 <div class="flex flex-col justify-center">
-  <!-- Time display -->
-  <div class="flex items-baseline space-x-1 font-mono tracking-tight text-white select-none">
-    <span class="text-5xl sm:text-6xl font-extrabold tracking-tighter drop-shadow-sm">{hours}</span>
-    <span class="text-4xl sm:5xl font-bold text-sky-400/80 animate-pulse">:</span>
-    <span class="text-5xl sm:text-6xl font-extrabold tracking-tighter drop-shadow-sm">{minutes}</span>
-    <span class="text-2xl sm:text-3xl font-semibold text-slate-400 ml-1.5">{seconds}</span>
+  <div class="flex items-baseline space-x-0.5 font-mono tracking-tight text-white select-none leading-none">
+    <span class="text-[2.5rem] font-extrabold tracking-tighter">{hours}</span>
+    <span class="text-2xl font-bold text-sky-400/80 animate-pulse">:</span>
+    <span class="text-[2.5rem] font-extrabold tracking-tighter">{minutes}</span>
+    <span class="text-lg font-semibold text-slate-400 ml-1">{seconds}</span>
   </div>
 
-  <!-- Date & Location -->
-  <div class="flex items-center space-x-2 mt-1 text-slate-300 text-sm sm:text-base font-medium">
+  <div class="flex items-center flex-wrap gap-x-1.5 gap-y-0.5 mt-0.5 text-slate-300 text-[11px] font-medium leading-tight">
     <span class="text-sky-400 font-semibold">{weekday},</span>
     <span>{dateFormatted}</span>
-    <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/60 text-xs text-slate-300">
-      <Icon name="map-pin" size={12} class="text-sky-400" />
+    <span class="inline-flex items-center space-x-0.5 px-1.5 py-0 rounded-full bg-slate-800/80 border border-slate-700/60 text-[10px] text-slate-300">
+      <Icon name="map-pin" size={10} class="text-sky-400" />
       <span>{city}</span>
     </span>
   </div>

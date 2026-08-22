@@ -15,7 +15,7 @@
 <main class="h-screen w-screen flex flex-col bg-background text-slate-100 overflow-hidden select-none font-sans">
   <!-- Error notice if any -->
   {#if store.errors.weather || store.errors.transit}
-    <div class="bg-amber-500/20 border-b border-amber-500/30 px-3 py-1 text-xs text-amber-200 flex items-center justify-between z-40 shrink-0">
+    <div class="bg-amber-500/20 border-b border-amber-500/30 px-2 py-0.5 text-[10px] text-amber-200 flex items-center justify-between z-40 shrink-0">
       <div class="flex items-center space-x-2 truncate">
         <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
         <span class="truncate">
