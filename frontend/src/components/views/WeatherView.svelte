@@ -102,7 +102,7 @@
       </div>
 
       <!-- Horizontal Scroll Container -->
-      <div class="flex-1 min-h-0 flex overflow-x-auto gap-2 pb-1 snap-x scroll-smooth">
+      <div class="flex-1 min-h-0 flex overflow-x-auto gap-2 pb-1 snap-x scroll-smooth use:methods.dragScrollX">
         {#each daily as d, index}
           <!-- Vertical Chip -->
           <div
